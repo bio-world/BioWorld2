@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.vv.bioworld</groupId>
+	<artifactId>RemindMeEAR</artifactId>
+	<version>1.0.0</version>
+
+	<packaging>ear</packaging>
+	<name>RemindMeEAR</name>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven.java.net</id>
+			<name>Java.net Maven2 Repository</name>
+			<url>http://download.java.net/maven/2</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<finalName>RemindMeEAR</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<modules>
+						<webModule>
+							<groupId>com.vv.bioworld</groupId>
+							<artifactId>RemindMeWeb</artifactId>
+							<bundleFileName>RemindMeWeb.war</bundleFileName>
+							<contextRoot>/RemindMeWeb</contextRoot>
+						</webModule>
+						<!-- <ejbModule> <groupId>com.vv.bioworld</groupId> <artifactId>RemindMeInternalServices</artifactId> 
+							<bundleFileName>RemindMeInternalServices.jar</bundleFileName> </ejbModule> -->
+						<jarModule>
+							<groupId>com.vv.bioworld</groupId>
+							<artifactId>RemindMeInternalServices</artifactId>
+							<bundleFileName>RemindMeInternalServices.jar</bundleFileName>
+						</jarModule>
+						
+					</modules>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.vv.bioworld</groupId>
+			<artifactId>RemindMeWeb</artifactId>
+			<version>${RemindMeEAR-version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.vv.bioworld</groupId>
+			<artifactId>RemindMeInternalServices</artifactId>
+			<version>${RemindMeEAR-version}</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<RemindMeEAR-version>1.0.0</RemindMeEAR-version>
+	</properties>
+
+</project>
