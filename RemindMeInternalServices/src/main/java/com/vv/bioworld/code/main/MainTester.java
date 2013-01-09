@@ -80,8 +80,8 @@ public class MainTester {
 		
 		manager.persist(user);
 		manager.persist(article);
-		manager.persist(tag);
-		manager.persist(tag4);
+//		manager.persist(tag);
+//		manager.persist(tag4);
 		
 		
 		manager.flush();
