@@ -20,7 +20,8 @@ import com.vv.bioworld.code.entity.User;
 @Repository("ArticleDao")
 @NamedQueries({
 		@NamedQuery(name = "GetArticlesByAuthor", query = "SELECT article FROM Article article WHERE article.user.id = :userId"),
-		@NamedQuery(name = "GetArticlesByTag", query = "SELECT article from Article article, Tag tag JOIN article.tags aTags JOIN tag.articles tArts WHERE aTags.id = tArts.id AND tag.name = :tagName") })
+		@NamedQuery(name = "GetArticlesByTag", query = "SELECT article from Article article, Tag tag JOIN article.tags aTags JOIN tag.articles tArts WHERE aTags.id = tArts.id AND tag.name = :tagName"),
+		@NamedQuery(name = "GetLatestArticles", query = "SELECT article FROM Article article ORDER BY article.creationDate") })
 public class ArticleDaoImpl implements ArticleDao {
 
 	@PersistenceContext
@@ -65,5 +66,15 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public void editArticle() {
 		// TODO add functionality
+	}
+
+	@Override
+	public List<Article> getLatestArticles() {
+		EntityManager em = emf.createEntityManager();
+		Query latestArticles = em.createNamedQuery("GetLatestArticles",
+				Article.class);
+		List<Article> articles = latestArticles.getResultList();
+		em.close();
+		return articles;
 	}
 }

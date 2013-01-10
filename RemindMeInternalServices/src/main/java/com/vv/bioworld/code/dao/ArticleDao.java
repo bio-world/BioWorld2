@@ -17,5 +17,7 @@ public interface ArticleDao {
 	void removeArticle();
 	
 	void editArticle();
+	
+	List<Article> getLatestArticles();
 
 }
